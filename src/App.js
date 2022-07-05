@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import items from "./items.js";
+import ButtonFamily from "./components/ButtonFamily";
+import Item from "./components/Item";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [list, setList] = useState([]);
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const menu = new Set();
+        menu.add("All");
+        items.forEach((item) => {
+            menu.add(item.category);
+        });
+        setList(Array.from(menu));
+        console.log(list);
+    }, []);
+
+    useEffect(() => {
+        setCourses(items);
+    }, []);
+
+    function filterItems(category) {
+        if (category === "All") {
+        setCourses(items);
+        } else {
+            const temp = items.filter((course) => course.category === category);
+            setCourses(temp);
+        }
+    }
+
+    return (
+        <main className="component">
+            <div className="title">
+                <h1>Courses</h1>
+                <div className="bar"></div>
+            </div>
+            <div className="nav">
+                {list.map((i) => (
+                    <ButtonFamily
+                        filterItems={filterItems}
+                        category={i}
+                    ></ButtonFamily>
+                ))}
+            </div>
+            <div className="items">
+                {courses.map((course) => (
+                    <Item {...course}></Item>
+                ))}
+            </div>
+        </main>
+    );
 }
 
 export default App;
