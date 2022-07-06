@@ -14,7 +14,6 @@ function App() {
             menu.add(item.category);
         });
         setList(Array.from(menu));
-        console.log(list);
     }, []);
 
     useEffect(() => {
@@ -23,7 +22,7 @@ function App() {
 
     function filterItems(category) {
         if (category === "All") {
-        setCourses(items);
+            setCourses(items);
         } else {
             const temp = items.filter((course) => course.category === category);
             setCourses(temp);
