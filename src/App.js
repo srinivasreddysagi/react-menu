@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import items from "./items.js";
 import ButtonFamily from "./components/ButtonFamily";
 import Item from "./components/Item";
+import { v4 as uuid } from "uuid";
 
 function App() {
     const [list, setList] = useState([]);
     const [courses, setCourses] = useState([]);
+    const [family, setFamily] = useState("All");
 
     useEffect(() => {
         const menu = new Set();
@@ -38,6 +40,8 @@ function App() {
             <div className="nav">
                 {list.map((i) => (
                     <ButtonFamily
+                        cls={i === family ? "family active" : "family"}
+                        setFamily={setFamily}
                         filterItems={filterItems}
                         category={i}
                     ></ButtonFamily>

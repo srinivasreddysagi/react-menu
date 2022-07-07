@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Item({title, img, price, desc}) {
+export default function Item({ id, title, img, price, desc}) {
   return (
       <article className="item">
           <div className="contain">
