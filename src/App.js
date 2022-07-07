@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import items from "./items.js";
 import ButtonFamily from "./components/ButtonFamily";
 import Item from "./components/Item";
-import { v4 as uuid } from "uuid";
 
 function App() {
     const [list, setList] = useState([]);
